@@ -1,4 +1,18 @@
-% Set a random seed
+%% RELSIG_EXAMPLE  Demonstration script for the relSig package
+% Sam Berens (s.berens@sussex.ac.uk)
+% RELSIG_EXAMPLE reproduces the workflow outlined in the README. It
+% simulates data, fits an OLS model, performs family‑wise error‑rate
+% control with RELSIG_FWE, and displays the significant results.
+% 
+% To run, simply type
+%    relSig_Example
+% at the MATLAB command prompt.
+%
+% See also OLS, RELSIG_FWE, BERENS_HOLM_SIDAK.
+%
+% -------------------------------------------------------------------------
+
+%% Set a random seed
 rng(0);
 
 %% Set the ground thruth

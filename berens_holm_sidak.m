@@ -1,5 +1,39 @@
 function [sig] = berens_holm_sidak(pValues,mPrime,alpha)
+% Berens-Holm-Sidak step‑down multiple‑testing correction.
+% Sam Berens (s.berens@sussex.ac.uk)
+% 
+% SIG = BERENS_HOLM_SIDAK(PVALUES, MPRIME) returns a logical vector SIG
+% whose TRUE entries mark hypotheses that remain significant after the
+% Berens‑Holm‑Šídák step‑down procedure controlling the family‑wise error
+% rate (FWE) at ALPHA = 0.05.
+% 
+% SIG = BERENS_HOLM_SIDAK(PVALUES, MPRIME, ALPHA) uses the specified FWE
+% threshold ALPHA (0 < ALPHA < 1).
+% 
+% Input arguments
+% ---------------
+% pValues : vector
+%           Raw p‑values (one per hypothesis).
+% mPrime  : scalar
+%           Effective number of independent tests.  See RELSIG_FWE for how 
+%           this is estimated.
+% alpha   : scalar, optional (default 0.05).
+%           Target family‑wise error rate.
+%
+% Output arguments
+% ----------------
+% sig     : logical vector (same size as pValues)
+%           TRUE for hypotheses that remain significant after correction.
+% 
+% Example
+% -------
+% sig = berens_holm_sidak([0.01 0.20 0.03], 2);
+% 
+% See also RELSIG_FWE, FNC2MIN_BHS.
+% 
+% -------------------------------------------------------------------------
 
+%% Check inputs
 if nargin < 3
     alpha = 0.05;
 end
