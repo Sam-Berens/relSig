@@ -37,7 +37,7 @@ The example script will
 ## Usage in your own code
 ```matlab
 [p,fStat,Bhat,~,Err] = OLS(Y,X,H);   % raw tests  (m tests)
-ErrSigmaHat         = cov(Err);      % estimated Σ̂
+ErrSigmaHat  = cov(Err);             % estimated Σ̂
 sig = relSig_FWE(ErrSigmaHat,X,H,p); % 1×m logical result
 ```
 | Argument | Meaning |
