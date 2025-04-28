@@ -1,7 +1,6 @@
 # relSig
 
-`relSig` is a small **MATLAB** package that helps you decide *which* out of several simultaneously tested regression effects remain reliable once you control the **family‑wise error rate (FWE)**.  
-It combines ordinary‑least‑squares (OLS) modelling with a bootstrap‑calibrated version of the **Holm–Šídák** multiple‑comparison procedure.
+`relSig` is a small **MATLAB** package that helps you decide *which* out of several simultaneously tested regression effects remain reliable once you control the **family‑wise error rate (FWE)**. It combines ordinary‑least‑squares (OLS) modelling with a bootstrap‑calibrated version of the **Holm–Šídák** multiple‑comparison procedure.
 
 ---
 
@@ -20,7 +19,7 @@ It combines ordinary‑least‑squares (OLS) modelling with a bootstrap‑calibr
 ## Quick start
 
 ```bash
-git clone https://github.com/<your-org>/relSig.git
+git clone https://github.com/Sam-Berens/relSig.git
 cd relSig
 matlab -batch "relSig_Example"
 ```
@@ -36,13 +35,11 @@ The example script will
 ---
 
 ## Usage in your own code
-
 ```matlab
 [p,fStat,Bhat,~,Err] = OLS(Y,X,H);   % raw tests  (m tests)
-ErrSigmaHat         = cov(Err);     % estimated Σ̂
-sig = relSig_FWE(ErrSigmaHat,X,H,p);% 1×m logical result
+ErrSigmaHat         = cov(Err);      % estimated Σ̂
+sig = relSig_FWE(ErrSigmaHat,X,H,p); % 1×m logical result
 ```
-
 | Argument | Meaning |
 |----------|---------|
 | `Y` | *n × m* matrix of responses |
@@ -54,12 +51,10 @@ sig = relSig_FWE(ErrSigmaHat,X,H,p);% 1×m logical result
 ### Optional tweaks
 
 Open **`relSig_FWE.m`** and modify
-
 ```matlab
 nIter = 1e5;   % number of bootstrap samples
-alpha = 0.05; % target family‑wise error rate
+alpha = 0.05;  % target family‑wise error rate
 ```
-
 to trade speed for precision or change the error‑rate threshold.
 
 ---
@@ -70,7 +65,6 @@ to trade speed for precision or change the error‑rate threshold.
 2. **Null bootstrap** – repeatedly draw *n*‑sample data from **N**(0, Σ̂), refit the same model and store the vector of null *p*-values.  
 3. **Find effective m′** – choose *m′* that makes the empirical FWE equal to the nominal α (root‑finding via `fminbnd`).  
 4. **Correct** – apply Berens–Holm–Šídák with that *m′* to the original *p*-values.
-
 The result is a step‑down procedure whose FWE is calibrated in finite samples instead of relying on large‑sample or independence assumptions.
 
 ---
